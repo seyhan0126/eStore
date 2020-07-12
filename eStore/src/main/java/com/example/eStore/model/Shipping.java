@@ -1,9 +1,8 @@
 package com.example.eStore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.example.eStore.model.enums.ShippingType;
+
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -16,7 +15,12 @@ public class Shipping {
     @Column
     private String state;
     @Column
+    private Instant ship_date;
+    @Column
     private Instant delivery_date;
     @Column
     private Payment payment;
+    @Column(name = "shipping_type")
+    @Enumerated(EnumType.STRING)
+    private ShippingType shippingType = ShippingType.NORMAL;
 }

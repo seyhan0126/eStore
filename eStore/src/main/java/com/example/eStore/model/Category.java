@@ -1,7 +1,5 @@
 package com.example.eStore.model;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,17 +17,17 @@ public class Category {
     @Column
     private String description;
 
-    public Product getProduct() {
+    public Set<Product> getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Set<Product> product) {
         this.product = product;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @OneToMany
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Set<Product> product = new HashSet<>();
 
     public Long getId() {
         return id;

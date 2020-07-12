@@ -1,6 +1,6 @@
 package com.example.eStore.model;
 
-import com.example.eStore.enums.UserType;
+import com.example.eStore.model.enums.UserType;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -12,19 +12,32 @@ import java.util.Set;
 public class User {
     @Id
     private Long id;
+
     @Column
-    private String firstName;
+    private String first_name;
+
     @Column
-    private String lastName;
+    private String last_name;
+
     @Column
     private String email;
+
     @Column
     private String password;
+
     @Column
-    private String phoneNumber;
+    private String phone_number;
+
+    @Column
+    private Instant created_at;
+
+    @Column
+    private Instant updated_at;
+
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private UserType userType = UserType.NONE;
+
     @OneToMany
     private Set<Account> accounts = new HashSet<>();
 
@@ -33,11 +46,7 @@ public class User {
             name = "users_addresses",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id")
-
     )
     private Set<Address> addresses = new HashSet<>();
-    @Column
-    private Instant created_at;
-    @Column
-    private Instant updated_at;
+
 }

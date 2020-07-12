@@ -13,9 +13,20 @@ public class Comment {
     @Column
     private String comment;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn()
-    private Product product;
+   @Column
+   private String answer;
+
+   @ManyToMany
+   @JoinTable(
+            name = "comment_accounts",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+   private Set<Account> accounts = new HashSet<>();
+
+   @ManyToOne(cascade = {CascadeType.ALL})
+   @JoinColumn(name = "product_id")
+   private Set<Product> products = new HashSet<>();
 
     public Long getId() {
         return id;

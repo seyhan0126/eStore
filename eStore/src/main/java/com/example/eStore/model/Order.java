@@ -1,12 +1,7 @@
 package com.example.eStore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -17,10 +12,28 @@ public class Order {
     @Column
     private String name;
 
+
+    @Column(name = "is_active")
+    //order_status -> isActive or not
+            boolean isActive;
+
     @Column(name = "order_date")
     private Instant order_date;
 
-    @Column
-    //order_status -> isActive or not
-    boolean isActive;
+    @ManyToOne
+    @Column(name = "account_id")
+    private Account account;
+
+    @ManyToOne
+    @Column(name = "payment_id")
+    private Payment payment;
+
+    @ManyToOne
+    @Column(name = "shipping_id")
+    private Shipping shipping;
+
+    @ManyToOne
+    @Column(name = "product_id")
+    private Product product;
+
 }

@@ -1,9 +1,7 @@
 package com.example.eStore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,5 +15,12 @@ public class Review {
     @Column
     private String status;
 
-    private Set<User> users = new HashSet<>();
+    @Column(name = "created_at")
+    private Instant created_at;
+    @Column(name = "updated_at")
+    private Instant updated_at;
+    @OneToMany
+    private Set<Product> products = new HashSet<>();
+
+
 }
